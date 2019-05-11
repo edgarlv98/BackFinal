@@ -7,7 +7,7 @@ const users = require('./controllers/users')
 const auth = require('./middleware/auth')
 
 //Rutas para controlador usuario
-router.get('/users/:id', users.getUser)
+router.get('/users/:id', auth, users.getUser)
 router.get('/users', users.getUsers)
 router.post('/users/login', users.login)
 router.post('/users/logout', users.logout)
@@ -18,16 +18,16 @@ router.delete('/users/:id', users.deleteUser)
 //Rutas para controlador jugadores
 router.get('/consultar/jugadores', jugador.getJugadores)
 router.get('/consultar/jugadores/:id', jugador.getJugador)
-router.post('/editar/jugadores', jugador.createJugador)
-router.patch('/editar/jugadores/:id', jugador.updateJugador)
-router.delete('/editar/jugadores/:id', jugador.deleteJugador)
+router.post('/editar/jugadores', auth, jugador.createJugador)
+router.patch('/editar/jugadores/:id', auth, jugador.updateJugador)
+router.delete('/editar/jugadores/:id', auth, jugador.deleteJugador)
 
 //Rutas para controlador equipos
 router.get('/consultar/equipos', equipo.getEquipos)
 router.get('/consultar/equipos/:id', equipo.getEquipo)
-router.post('/editar/equipos', equipo.createEquipo)
-router.patch('/editar/equipos/:id', equipo.updateEquipo)
-router.delete('/editar/equipos/:id', equipo.deleteEquipo)
+router.post('/editar/equipos', auth, equipo.createEquipo)
+router.patch('/editar/equipos/:id', auth, equipo.updateEquipo)
+router.delete('/editar/equipos/:id', auth, equipo.deleteEquipo)
 
 router.get('*', function(req, res) {
     res.send({
