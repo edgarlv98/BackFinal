@@ -8,7 +8,7 @@ const auth = require('./middleware/auth')
 
 //Rutas para controlador usuario
 router.get('/users/:id', auth, users.getUser)
-router.get('/users', users.getUsers)
+router.get('/users', auth, users.getUsers)
 router.post('/users/login', users.login)
 router.post('/users/logout', users.logout)
 router.post('/users', users.createUser)
