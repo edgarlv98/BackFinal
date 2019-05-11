@@ -29,4 +29,10 @@ router.post('/editar/equipos', equipo.createEquipo)
 router.patch('/editar/equipos/:id', equipo.updateEquipo)
 router.delete('/editar/equipos/:id', equipo.deleteEquipo)
 
+router.get('*', function(req, res) {
+    res.send({
+      error: 'Esta ruta no existe'
+    })
+  })
+
 module.exports = router
