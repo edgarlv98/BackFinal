@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const config = require('../config')
 
-const connectionUrl = 'mongodb+srv://Admin:soccer1998@cluster0-ltic7.mongodb.net/ProyectoFinal?retryWrites=true' || process.env.NODE_ENV
+const connectionUrl = config.connectionURL || process.env.NODE_ENV
 
 //Coneccion a la base de datos
 mongoose.connect(connectionUrl, {

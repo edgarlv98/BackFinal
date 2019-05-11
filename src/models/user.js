@@ -46,16 +46,16 @@ userSchema.statics.findByCredentials = function(email, password) {
   return new Promise( function(resolve, reject) {
     User.findOne({ email }).then(function(user) {
       if( !user ) {
-        return reject('User does not exist')
+        return reject('El usuario no existe')
       }
       bcrypt.compare(password, user.password).then(function(match) {
         if(match) {
           return resolve(user)
         } else {
-          return reject('Wrong password!')
+          return reject('Contraseña o usuario incorrecto')
         }
       }).catch( function(error) {
-        return reject('Wrong password!')
+        return reject('Contraseña o usuario incorrecto')
       })
     })
   })
@@ -63,7 +63,7 @@ userSchema.statics.findByCredentials = function(email, password) {
 
 userSchema.methods.generateToken = function() {
   const user = this
-  const token = jwt.sign({ _id: user._id.toString() }, 'superSecret', { expiresIn: '7 days'})
+  const token = jwt.sign({ _id: user._id.toString() }, config.secret, { expiresIn: '7 days'})
   user.tokens = user.tokens.concat({ token })
   return new Promise(function( resolve, reject) {
     user.save().then(function(user){
